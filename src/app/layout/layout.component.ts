@@ -1,3 +1,4 @@
+import { PostService } from './../services/post.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  data = '';
+
+  constructor(
+    private post: PostService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  getData() {
+    this.post.getPosts().subscribe(posts => {
+      this.data = JSON.stringify(posts);
+    });
+  }
 }
